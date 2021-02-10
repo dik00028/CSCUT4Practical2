@@ -1,34 +1,66 @@
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
+import javax.tools.JavaFileManager;
 import java.lang.Number;
+import java.util.logging.SimpleFormatter;
+import java.text.ParsePosition;
 
 /**
- * 
  * CSCU9T4 Java strings and files exercise.
- *
  */
 public class FilesInOut {
-
     public static void main(String[] args) {
-        // Replace this with statements to set the file name (input) and file name (output).
-        // Initially it will be easier to hardcode suitable file names.
 
-        // Set up a new Scanner to read the input file.
-        // Processing line by line would be sensible here.
-        // Initially, echo the text to System.out to check you are reading correctly.
-        // Then add code to modify the text to the output format.
+        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Scanner in = new Scanner(System.in);
+        System.out.println("supply filename for input:");
 
-        // Set up a new PrintWriter to write the output file.
-        // Add suitable code into the above processing (because you need to do this line by line also.
-        // That is, read a line, write a line, loop.
 
-        // Finally, add code to read the filenames as arguments from the command line.
+        Date date = null;
+        String formattedData = "";//used to add the formated names and dates together in the end
+        try {
+            String inputFileName = in.nextLine();//gets the name of the file and supplies it as the path
+            File inputFile = new File(inputFileName);
+            Scanner inFile = new Scanner(inputFile);//scanning the file
 
-        System.out.println("You need to add your own code to do anything");
+            while (inFile.hasNextLine()) {
+                String fileContent = inFile.nextLine();//stores the value of each line
+                String dateFormatter = fileContent.replaceAll("[^0-9]", "");//stores only the numbers in order to parse them
+                date = s.parse(dateFormatter);//parses the numbers to dates
+                String nameFormatter = fileContent.replaceAll("[^a-zA-Z]", " ");//stores only the string values
 
-    } // main
+                formattedData = formattedData.concat(nameFormatter).concat(simpleDateFormat.format(date) + "\n");//names and dates are grouped here
 
-} // FilesInOut
+
+            }
+
+        } catch (IOException | ParseException e) {
+            System.err.println("IOException: " + e.getMessage()
+                    + "not found ");
+        }
+        System.out.println(formattedData);
+
+        System.out.println("supply filename for output:");
+
+
+        try {
+
+            String filename = in.nextLine();//get the name of the file that is going to be created
+//            String filename = "OutputFile.txt";
+
+            PrintWriter outputFile = new PrintWriter(filename);
+
+            outputFile.format("%S", formattedData);// formats the letters to be in capital form
+            outputFile.close();//terminates
+        } catch (FileNotFoundException e) {
+            System.err.println("FileNotFoundException: " + e.getMessage() + " not openable");
+            System.exit(0);
+        }
+    }
+}
