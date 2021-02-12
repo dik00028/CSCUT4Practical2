@@ -30,7 +30,6 @@ public class FormatterU implements Formatter {
                 String dateFormatter = fileContent.replaceAll("[^0-9]", "");//stores only the numbers in order to parse them
                 date = s.parse(dateFormatter);//parses the numbers to dates
                 String nameFormatter = fileContent.replaceAll("[^a-zA-Z]", " ");//stores only the string values
-
                 formattedData = formattedData.concat(nameFormatter).concat(simpleDateFormat.format(date) + "\n");//names and dates are grouped here
 
             }
@@ -49,7 +48,7 @@ public class FormatterU implements Formatter {
 
             PrintWriter outputFile = new PrintWriter(filename);//take the file name  from the parameter as the file that is going to be created
 
-            outputFile.format("%S", this.formattedData);// formats the letters to be in capital form
+            outputFile.format(this.formattedData);// formats the letters to be in capital form
             outputFile.close();//terminates
         } catch (FileNotFoundException e) {
             System.err.println("FileNotFoundException: " + e.getMessage() + " not openable");

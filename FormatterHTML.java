@@ -1,47 +1,21 @@
-import java.io.File;
+
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
 
 
 public class FormatterHTML implements Formatter {
-    SimpleDateFormat s;
-    SimpleDateFormat simpleDateFormat;
+
+
     String formattedData;
 
     @Override
     public String inputTaker(String filename) {
-        s = new SimpleDateFormat("ddMMyyyy");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Scanner in = new Scanner(System.in);
-        Date date = null;
-        String formattedData = "";//used to add the formatted names and dates together in the end
-
-        try {
-
-            File inputFile = new File(filename);
-            Scanner inFile = new Scanner(inputFile);//scanning the file
-
-            while (inFile.hasNextLine()) {
-                String fileContent = inFile.nextLine();//stores the value of each line
-                String dateFormatter = fileContent.replaceAll("[^0-9]", "");//stores only the numbers in order to parse them
-                date = s.parse(dateFormatter);//parses the numbers to dates
-                String nameFormatter = fileContent.replaceAll("[^a-zA-Z]", " ");//stores only the string values
-
-                formattedData = formattedData.concat(nameFormatter).concat(simpleDateFormat.format(date) + "\n");//names and dates are grouped here
-
-            }
-            this.formattedData = formattedData;
-
-        } catch (IOException | ParseException e) {
-            System.err.println("IOException: " + e.getMessage()
-                    + "not found ");
-        }
-        return this.formattedData;
+        Formatter f = new FormatterU();
+        f.inputTaker(filename);
+        this.formattedData = f.inputTaker(filename);//reusing the formated string from FormatterU class
+        System.out.println(this.formattedData);
+        return this.formattedData;//returning it if needed for use
     }
 
     @Override
@@ -49,14 +23,13 @@ public class FormatterHTML implements Formatter {
         try {
 
             PrintWriter outputFile = new PrintWriter(filename + ".html");/////////////////////////
-            Scanner scanner = new Scanner(System.in);
             outputFile.println("<html>");
             outputFile.println("<head>");
             outputFile.println("</head>");
             outputFile.println("<body>");
-            outputFile.println("<br>");
-            outputFile.format("%S", formattedData);
-            outputFile.println("</br>");
+            outputFile.println("<p>");
+            outputFile.format("%S", this.formattedData);
+            outputFile.println("</p>");
             outputFile.println("</body>");
             outputFile.println("</html>");
             outputFile.close();
@@ -65,8 +38,6 @@ public class FormatterHTML implements Formatter {
             System.err.println("FileNotFoundException: " + e.getMessage() + " not openable");
             System.exit(0);
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////
 
     }
 
