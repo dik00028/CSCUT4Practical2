@@ -1,11 +1,6 @@
-import java.io.File;
+
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Formats the data into uppercase
@@ -16,8 +11,8 @@ public class FormatterU implements Formatter {
 
     @Override
     public String inputTaker(String filename) {
-        FormatterM formatterM = new FormatterM();
-        this.formattedData = formatterM.inputTaker(filename);
+        FormatterM formatterM = new FormatterM();//creates an instance for base class of formatting inputs
+        this.formattedData = formatterM.inputTaker(filename);//set it to the private String of this class
         return this.formattedData;
     }
 

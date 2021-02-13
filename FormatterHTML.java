@@ -1,15 +1,6 @@
 
-import jdk.jfr.TransitionFrom;
-
-import java.io.File;
 import java.io.FileNotFoundException;
-
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Generates a new html file based on the input
@@ -19,12 +10,11 @@ import java.util.Scanner;
 public class FormatterHTML implements Formatter {
 
     private String formattedData;
-    SimpleDateFormat s = new SimpleDateFormat();
 
     @Override
     public String inputTaker(String filename) {
-        FormatterM formatterM= new FormatterM();
-        this.formattedData= formatterM.inputTaker(filename).replace("\n","<br>");
+        FormatterM formatterM= new FormatterM();//creating an instance of base class format
+        this.formattedData= formatterM.inputTaker(filename).replace("\n","<br>");// replace every escape char with break for html
         return this.formattedData;
     }
 
