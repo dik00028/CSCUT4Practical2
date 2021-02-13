@@ -1,5 +1,7 @@
-import java.text.Format;
-import java.util.Scanner;
+/**
+ * author : Dion Kadriu
+ * A java program to format text based on the argument passed
+ */
 
 public class FormatNames {
 
