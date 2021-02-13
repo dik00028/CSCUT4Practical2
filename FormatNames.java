@@ -3,30 +3,29 @@ import java.util.Scanner;
 
 public class FormatNames {
 
-
+    /**
+     * Main class where the formatting is going to match the argument
+     */
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Formatter uFormatter = new FormatterU();// the formatter for Upper case display
+        Formatter hFormatter = new FormatterHTML();// the formatter for html display
+        Formatter mFormatter = new FormatterM();//the formatter for the middle names
+        Formatter tFormatter = new FormatterT();// the formatter for the title case
 
-        Formatter uFormatter = new FormatterU();// the formater for Upper case display
-        Formatter hFormatter = new FormatterHTML();// the formater for html display
-        Formatter mFormatter = new FormatterM();
-        Formatter tFormatter = new FormatterT();
-        String file;
-        System.out.println("enter the other file name");
-        if (args[0].equals("-u")) {
-            uFormatter.inputTaker(args[1]);//just for now
-            uFormatter.outputMaker(args[2]);// just for now
+        if (args[0].equals("-u")) {  //if the argument is -u manipulate like the uFormatterClass
+            uFormatter.inputTaker(args[1]);
+            uFormatter.outputMaker(args[2]);
         }
-        if (args[0].equals("-h")) {
+        if (args[0].equals("-h")) {  //if the argument is -u manipulate like the hFormatterClass
             hFormatter.inputTaker(args[1]);
             hFormatter.outputMaker(args[2]);
         }
-        if (args[0].equals("-m")) {
+        if (args[0].equals("-m")) {  //if the argument is -u manipulate like the mFormatterClass
             mFormatter.inputTaker(args[1]);
             mFormatter.outputMaker(args[2]);
         }
-        if (args[0].equals("-t")) {
+        if (args[0].equals("-t")) {  //if the argument is -u manipulate like the tFormatterClass
             tFormatter.inputTaker(args[1]);
             tFormatter.outputMaker(args[2]);
         }
