@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Formats the data into uppercase
  */
 public class FormatterU implements Formatter {
-    SimpleDateFormat s;
+
     String formattedData;
 
     @Override
